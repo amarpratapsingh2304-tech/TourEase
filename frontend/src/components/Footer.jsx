@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Heart } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -70,7 +71,7 @@ export default function Footer() {
         <div className="border-t border-gray-800/80 pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-500 uppercase tracking-[0.25em]">
           <p>&copy; 2026 TourEase. All rights reserved.</p>
           <div className="flex items-center">
-            Handcrafted with <span className="text-orange-500 text-sm mx-1 animate-bounce">🧡</span> globally
+            Handcrafted with <Heart className="text-orange-500 w-4 h-4 mx-1 fill-orange-500 animate-pulse" /> globally
           </div>
         </div>
       </div>
