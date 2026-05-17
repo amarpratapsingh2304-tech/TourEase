@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, MapPin, Star, Clock, TrendingUp } from "lucide-react";
 import { destinations } from "../utils/destinationsData";
 import { useFavorites } from "../hooks/useFavorites";
+import ReviewsPanel from "../components/ReviewsPanel";
 
 export default function DestinationDetails() {
   const { id } = useParams();
@@ -90,6 +91,9 @@ export default function DestinationDetails() {
                 </ul>
               </div>
             )}
+
+            {/* Tourist Reviews & Ratings */}
+            <ReviewsPanel destination={destination} />
           </div>
 
           {/* Right Section */}
