@@ -156,7 +156,7 @@ const generateTrip = async (req, res) => {
         ).join("\n");
       }
     } catch (weatherErr) {
-      console.error("⚠️ Weather service integration error:", weatherErr.message);
+      console.error("Weather service integration error:", weatherErr.message);
     }
 
     const interestText =
@@ -233,7 +233,7 @@ Return in clean readable text.
 
     res.json({ plan });
   } catch (error) {
-    console.error("❌ AI Error:", error);
+    console.error("AI Error:", error);
     if (!openai) {
       const plan = createMockItinerary({
         destination: req.body.destination,
@@ -307,7 +307,7 @@ Return the updated itinerary only.
 
     res.json({ updatedPlan });
   } catch (error) {
-    console.error("❌ Refinement AI Error:", error);
+    console.error("Refinement AI Error:", error);
     if (!openai) {
       return res.json({ updatedPlan: `${req.body.originalPlan}\n\nNOTE: OpenAI API key is not configured, so the itinerary was not changed.` });
     }
