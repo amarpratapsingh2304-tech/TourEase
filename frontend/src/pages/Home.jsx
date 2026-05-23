@@ -136,49 +136,42 @@ export default function Home() {
             description="Smart itinerary builder tailored to your interests, budget, and time. Get personalized recommendations instantly."
             color="bg-blue-100 text-blue-600"
           />
-
           <FeatureCard
             icon={<Shield className="w-10 h-10" />}
             title="Local Advice & Support"
             description="Get real-time tips from locals and travelers. Know what to do, where to go, and what to avoid."
             color="bg-teal-100 text-teal-600"
           />
-
           <FeatureCard
             icon={<Smartphone className="w-10 h-10" />}
             title="Smart Accommodation"
             description="Find the perfect stay with AI-driven suggestions based on reviews, location, and price."
             color="bg-purple-100 text-purple-600"
           />
-
           <FeatureCard
             icon={<Video className="w-10 h-10" />}
             title="Online Translation"
             description="Break language barriers with instant AI-powered translation for over 100 languages."
             color="bg-green-100 text-green-600"
           />
-
           <FeatureCard
             icon={<Calendar className="w-10 h-10" />}
             title="Offline Accessibility"
             description="Access your itinerary, maps & guides without internet. Travel worry-free anywhere."
             color="bg-orange-100 text-orange-600"
           />
-
           <FeatureCard
             icon={<Headphones className="w-10 h-10" />}
             title="24/7 Live Support"
             description="Get instant help anytime, anywhere. Our travel experts are always ready to assist you."
             color="bg-pink-100 text-pink-600"
           />
-
           <FeatureCard
             icon={<Users className="w-10 h-10" />}
             title="Group Trip Planner"
             description="Coordinate with friends easily. Share itineraries, split costs, and vote on activities."
             color="bg-indigo-100 text-indigo-600"
           />
-
           <FeatureCard
             icon={<DollarSign className="w-10 h-10" />}
             title="Budget Tracker"
@@ -208,7 +201,6 @@ export default function Home() {
               description="Simply enter where you want to go and when. Our AI understands your preferences."
               color="bg-gradient-to-br from-teal-400 via-teal-500 to-cyan-600 dark:from-purple-700 dark:via-indigo-700 dark:to-purple-800"
             />
-
             <StepCard
               number="2"
               icon={<Star className="w-8 h-8 text-teal-600 dark:text-indigo-600" />}
@@ -216,7 +208,6 @@ export default function Home() {
               description="Receive custom itineraries based on your interests, budget, and travel style."
               color="bg-orange-500"
             />
-
             <StepCard
               number="3"
               icon={<Clock className="w-8 h-8 text-teal-600 dark:text-indigo-600" />}
@@ -224,7 +215,6 @@ export default function Home() {
               description="Access your plans offline, get real-time updates, and enjoy 24/7 support."
               color="bg-gradient-to-br from-teal-400 via-teal-500 to-cyan-600 dark:from-purple-700 dark:via-indigo-700 dark:to-purple-800"
             />
-
             <StepCard
               number="4"
               icon={<Award className="w-8 h-8 text-teal-600 dark:text-indigo-600" />}
@@ -249,7 +239,6 @@ export default function Home() {
 
         <div className="community-marquee-wrapper">
           <div className="community-marquee-track">
-            {/* Original set */}
             <CommunityCard
               name="Emily Chen"
               location="New York, USA"
@@ -268,7 +257,6 @@ export default function Home() {
               quote="The budget tracker helped me travel more while spending less. I love how it suggests alternatives and helps optimize my expenses!"
               trips="15 Trips"
             />
-
             {/* Duplicate set for seamless loop */}
             <CommunityCard
               name="Emily Chen"
@@ -312,7 +300,9 @@ export default function Home() {
           </div>
         </div>
       </div>
+
       <Testimonials />
+
       {/* ================= CTA SECTION ================= */}
       <div className="bg-gradient-to-br from-teal-400 via-teal-500 to-cyan-600 dark:from-purple-700 dark:via-indigo-700 dark:to-purple-800 text-white py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -338,7 +328,10 @@ export default function Home() {
             >
               Get Started Free
             </Link>
-            <Link to="/demo" className="bg-white text-teal-600 dark:text-indigo-600 hover:bg-gray-100 px-10 py-4 rounded-lg font-semibold transition text-lg">
+            <Link
+              to="/demo"
+              className="bg-white text-teal-600 dark:text-indigo-600 hover:bg-gray-100 px-10 py-4 rounded-lg font-semibold transition text-lg"
+            >
               Watch Demo
             </Link>
           </div>
@@ -363,16 +356,29 @@ export default function Home() {
           </div>
         </div>
       </div>
-      </div>
-
+    </div>
   );
 }
 
+// ─── FeatureCard ─────────────────────────────────────────────────────────────
+// Only change from original: replaced `group-hover:scale-110` (instant snap)
+// with a spring cubic-bezier + subtle lift for a smooth pan-in/out feel.
 function FeatureCard({ icon, title, description, color }) {
+  const [hovered, setHovered] = React.useState(false);
+
   return (
-    <div className="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-800 hover:border-teal-200 dark:hover:border-teal-700 group">
+    <div
+      className="bg-white dark:bg-gray-900 p-8 rounded-xl border border-gray-100 dark:border-gray-800 hover:border-teal-200 dark:hover:border-teal-700 transition-all duration-300"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <div
-        className={`${color} w-16 h-16 rounded-lg flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}
+        className={`${color} w-16 h-16 rounded-lg flex items-center justify-center mb-5`}
+        style={{
+          transition: "transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease",
+          transform: hovered ? "scale(1.15) translateY(-4px)" : "scale(1) translateY(0px)",
+          boxShadow: hovered ? "0 8px 24px -4px rgba(0,0,0,0.15)" : "none",
+        }}
       >
         {icon}
       </div>
@@ -386,6 +392,7 @@ function FeatureCard({ icon, title, description, color }) {
   );
 }
 
+// ─── StepCard ─────────────────────────────────────────────────────────────────
 function StepCard({ number, icon, title, description, color }) {
   return (
     <div className="text-center">
@@ -409,6 +416,7 @@ function StepCard({ number, icon, title, description, color }) {
   );
 }
 
+// ─── CommunityCard ────────────────────────────────────────────────────────────
 function CommunityCard({ name, location, quote, trips }) {
   return (
     <div className="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-md transition-all">
@@ -434,13 +442,14 @@ function CommunityCard({ name, location, quote, trips }) {
   );
 }
 
+// ─── ImageCarousel ────────────────────────────────────────────────────────────
 const carouselImages = [
   "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2070&auto=format&fit=crop",
   "/images/tropical_beach_travel_1778697569059.png",
   "/images/mountain_lake_travel_1778698082955.png",
   "/images/city_skyline_travel_1778698104519.png",
   "/images/ancient_temple_travel_1778698184523.png",
-  "/images/european_street_travel_1778698461926.png"
+  "/images/european_street_travel_1778698461926.png",
 ];
 
 function ImageCarousel() {
@@ -454,23 +463,18 @@ function ImageCarousel() {
   }, []);
 
   return (
-    <div 
-      className="rounded-[2rem] overflow-hidden relative group w-full h-[300px] md:h-[380px] lg:h-[480px] transition-all duration-500 hover:shadow-2xl hover:shadow-teal-500/20"
-    >
+    <div className="rounded-[2rem] overflow-hidden relative group w-full h-[300px] md:h-[380px] lg:h-[480px] transition-all duration-500 hover:shadow-2xl hover:shadow-teal-500/20">
       {carouselImages.map((src, index) => (
         <img
           key={src}
           src={src}
           alt={`Travel destination ${index + 1}`}
           className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ${
-            index === currentIndex 
-              ? "opacity-100 scale-100" 
-              : "opacity-0 scale-100"
+            index === currentIndex ? "opacity-100 scale-100" : "opacity-0 scale-100"
           }`}
         />
       ))}
-      
-      {/* Gradient & Highlight Overlay */}
+
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 pointer-events-none"></div>
       <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors duration-500 z-10 pointer-events-none"></div>
 
@@ -486,6 +490,7 @@ function ImageCarousel() {
   );
 }
 
+// ─── PropTypes ────────────────────────────────────────────────────────────────
 FeatureCard.propTypes = {
   icon: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
@@ -507,4 +512,3 @@ CommunityCard.propTypes = {
   quote: PropTypes.string.isRequired,
   trips: PropTypes.string.isRequired,
 };
-

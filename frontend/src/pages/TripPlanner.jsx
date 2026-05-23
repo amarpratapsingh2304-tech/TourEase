@@ -105,7 +105,6 @@ export default function TripPlanner() {
   const [refinementInput, setRefinementInput] = useState("");
   const [isRefining, setIsRefining] = useState(false);
   const [recentSearches, setRecentSearches] = useState([]);
-  const navigate = useNavigate();
 
   const isStep1Valid = formData.destination.trim() !== '' && formData.startDate !== '' && formData.endDate !== '';
   const isStep3Valid = formData.interests.length > 0;
