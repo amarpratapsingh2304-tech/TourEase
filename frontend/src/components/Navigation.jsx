@@ -115,8 +115,8 @@ export default function Navigation() {
               </span>
             </div>
 
-            {/* DESKTOP NAV - Fluid gap and custom breakpoint */}
-            <div className="hidden min-[850px]:flex items-center gap-[clamp(2px,1vw,8px)] flex-1 justify-center px-[clamp(8px,2vw,32px)]">
+            {/* DESKTOP NAV - Snaps to mobile at 1200px */}
+            <div className="hidden min-[1200px]:flex items-center gap-[clamp(2px,1vw,8px)] flex-1 justify-center px-[clamp(8px,2vw,32px)]">
               {navItems.map((item, index) => {
                 const hoverColors = [
                   "hover:bg-cyan-100 dark:hover:bg-cyan-900/30",
@@ -195,10 +195,10 @@ export default function Navigation() {
                 </button>
               )}
 
-              {/* MOBILE MENU BUTTON - Custom breakpoint */}
+              {/* MOBILE MENU BUTTON - Appears at 1200px */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="min-[850px]:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 text-gray-900 dark:text-white"
+                className="min-[1200px]:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 text-gray-900 dark:text-white"
               >
                 {isOpen ? (
                   <X className="w-6 h-6" />
@@ -211,20 +211,20 @@ export default function Navigation() {
         </div>
       </nav>
 
-      {/* MOBILE MENU BACKDROP - Custom breakpoint */}
+      {/* MOBILE MENU BACKDROP - Appears at 1200px */}
       <div
         className={`
-          fixed inset-0 z-30 min-[850px]:hidden
+          fixed inset-0 z-30 min-[1200px]:hidden
           bg-black/50 backdrop-blur-sm
           ${isOpen ? "backdrop-open pointer-events-auto" : "backdrop-close pointer-events-none"}
         `}
         onClick={() => setIsOpen(false)}
       />
 
-      {/* MOBILE MENU DRAWER - Custom breakpoint */}
+      {/* MOBILE MENU DRAWER - Appears at 1200px */}
       <div
         className={`
-          fixed inset-y-0 right-0 z-40 min-[850px]:hidden
+          fixed inset-y-0 right-0 z-40 min-[1200px]:hidden
           w-72 bg-white dark:bg-gray-800 shadow-2xl border-l border-gray-200 dark:border-gray-700
           ${isOpen ? "menu-open" : "menu-close"}
         `}
