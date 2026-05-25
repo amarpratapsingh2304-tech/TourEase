@@ -38,6 +38,7 @@ export default function Navigation() {
     navigate("/login", { replace: true });
   };
 
+
   return (
     <>
       <style>{`
@@ -99,11 +100,8 @@ export default function Navigation() {
       `}</style>
 
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-950 bg-gradient-to-b from-teal-50/50 to-transparent dark:from-gray-800/50 shadow-md border-b border-gray-200 dark:border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Main Flex Container - This ensures proper alignment across all screen sizes */}
-          <div className="flex h-20 items-center justify-between w-full">
-            
-            {/* 1. LOGO (Always visible, aligned left) */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-4 lg:px-8 flex flex-row gap-5">
+          {/* LOGO */}
             <div
               onClick={handleLogoClick}
               className="cursor-pointer flex items-center gap-2 group shrink-0"
@@ -116,9 +114,10 @@ export default function Navigation() {
                 TourEase
               </span>
             </div>
+          <div className="flex h-16 items-center justify-between">
 
-            {/* 2. DESKTOP NAV (Hidden on screens smaller than 1200px) */}
-            <div className="hidden min-[1200px]:flex items-center gap-2 flex-1 justify-center px-8">
+            {/* DESKTOP NAV */}
+            <div className="hidden md:flex items-center gap-2 flex-1 justify-center px-8">
               {navItems.map((item, index) => {
                 const hoverColors = [
                   "hover:bg-cyan-100 dark:hover:bg-cyan-900/30",
@@ -160,8 +159,9 @@ export default function Navigation() {
               </Link>
             </div>
 
-            {/* 3. RIGHT ACTIONS (Theme, CTA, Burger Menu - aligned right) */}
+            {/* RIGHT ACTIONS */}
             <div className="flex items-center gap-4 shrink-0">
+
               {/* THEME TOGGLE */}
               <button
                 onClick={toggleTheme}
@@ -183,10 +183,9 @@ export default function Navigation() {
               {!isLoggedIn ? (
                 <Link
                   to="/login"
-                  className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-semibold transition items-center whitespace-nowrap"
+                  className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-semibold transition items-center w-33"
                 >
-                  Get Started
-                </Link>
+                  Get Started</Link>
               ) : (
                 <button
                   onClick={handleLogout}
@@ -196,10 +195,10 @@ export default function Navigation() {
                 </button>
               )}
 
-              {/* MOBILE MENU BUTTON (Appears below 1200px) */}
+              {/* MOBILE MENU BUTTON */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="min-[1200px]:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 text-gray-900 dark:text-white"
+                className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 text-gray-900 dark:text-white"
               >
                 {isOpen ? (
                   <X className="w-6 h-6" />
@@ -208,7 +207,6 @@ export default function Navigation() {
                 )}
               </button>
             </div>
-            
           </div>
         </div>
       </nav>
@@ -216,7 +214,7 @@ export default function Navigation() {
       {/* MOBILE MENU BACKDROP */}
       <div
         className={`
-          fixed inset-0 z-30 min-[1200px]:hidden
+          fixed inset-0 z-30 md:hidden
           bg-black/50 backdrop-blur-sm
           ${isOpen ? "backdrop-open pointer-events-auto" : "backdrop-close pointer-events-none"}
         `}
@@ -226,7 +224,7 @@ export default function Navigation() {
       {/* MOBILE MENU DRAWER */}
       <div
         className={`
-          fixed inset-y-0 right-0 z-40 min-[1200px]:hidden
+          fixed inset-y-0 right-0 z-40 md:hidden
           w-72 bg-white dark:bg-gray-800 shadow-2xl border-l border-gray-200 dark:border-gray-700
           ${isOpen ? "menu-open" : "menu-close"}
         `}
