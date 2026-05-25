@@ -100,7 +100,8 @@ export default function Navigation() {
 
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-950 bg-gradient-to-b from-teal-50/50 to-transparent dark:from-gray-800/50 shadow-md border-b border-gray-200 dark:border-gray-800">
         
-        <div className="w-full px-4 lg:px-12">
+        {/* Outer Container: Uses clamp to reduce side padding on medium screens to buy more space */}
+        <div className="w-full px-[clamp(16px,2vw,48px)]">
           
           <div className="flex h-20 items-center justify-between w-full">
             
@@ -118,8 +119,8 @@ export default function Navigation() {
               </span>
             </div>
 
-            {/* DESKTOP NAV */}
-            <div className="hidden min-[1380px]:flex items-center gap-2 flex-1 justify-center px-4 xl:px-8">
+            {/* DESKTOP NAV (Breaks exactly at 1200px, but shrinks dynamically before that) */}
+            <div className="hidden min-[1200px]:flex items-center gap-[clamp(4px,0.8vw,8px)] flex-1 justify-center px-2">
               {navItems.map((item, index) => {
                 const hoverColors = [
                   "hover:bg-cyan-100 dark:hover:bg-cyan-900/30",
@@ -135,7 +136,7 @@ export default function Navigation() {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`px-3 py-2 rounded-lg font-semibold whitespace-nowrap text-[15px] transition-all ${isActive(item.path)
+                    className={`px-[clamp(6px,0.8vw,12px)] py-2 rounded-lg font-semibold whitespace-nowrap text-[clamp(12px,1vw,15px)] transition-all ${isActive(item.path)
                       ? "bg-teal-500 dark:bg-indigo-600 text-white"
                       : `text-gray-700 dark:text-gray-300 ${hoverColors[index]}`
                       }`}
@@ -146,15 +147,15 @@ export default function Navigation() {
               })}
               <Link
                 to="/favorites"
-                className={`group relative px-3 py-2 rounded-lg font-semibold flex items-center gap-2 whitespace-nowrap text-[15px] transition ${isActive("/favorites")
+                className={`group relative px-[clamp(6px,0.8vw,12px)] py-2 rounded-lg font-semibold flex items-center gap-2 whitespace-nowrap text-[clamp(12px,1vw,15px)] transition ${isActive("/favorites")
                   ? "bg-teal-500 dark:bg-indigo-600 text-white"
                   : "text-gray-700 dark:text-gray-300 hover:bg-red-100 dark:hover:bg-red-900/30"
                   }`}
               >
-                <Heart className="w-5 h-5 transition-colors group-hover:text-red-500 group-hover:fill-red-500" />
+                <Heart className="w-5 h-5 transition-colors group-hover:text-red-500 group-hover:fill-red-500 shrink-0" />
                 Favorites
                 {favoriteIds.length > 0 && (
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 bg-red-500 text-white text-xs px-2 h-5 min-w-7 rounded-full inline-flex items-center justify-center">
+                  <span className="absolute right-2 top-1/2 -translate-y-1/2 bg-red-500 text-white text-xs px-2 h-5 min-w-7 rounded-full inline-flex items-center justify-center">
                     {favoriteIds.length}
                   </span>
                 )}
@@ -162,7 +163,7 @@ export default function Navigation() {
             </div>
 
             {/* RIGHT ACTIONS */}
-            <div className="flex items-center gap-4 shrink-0">
+            <div className="flex items-center gap-[clamp(8px,1vw,16px)] shrink-0">
               {/* THEME TOGGLE */}
               <button
                 onClick={toggleTheme}
@@ -180,18 +181,18 @@ export default function Navigation() {
                 )}
               </button>
 
-              {/* CTA */}
+              {/* CTA - Uses clamp to shrink padding and text proportionally */}
               {!isLoggedIn ? (
                 <Link
                   to="/login"
-                  className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-semibold transition items-center whitespace-nowrap"
+                  className="bg-orange-500 hover:bg-orange-600 text-white px-[clamp(12px,1.5vw,24px)] py-2 rounded-lg font-semibold transition items-center whitespace-nowrap text-[clamp(12px,1vw,15px)]"
                 >
                   Get Started
                 </Link>
               ) : (
                 <button
                   onClick={handleLogout}
-                  className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg font-semibold transition whitespace-nowrap text-[15px] shadow-lg hover:shadow-xl"
+                  className="bg-red-500 hover:bg-red-600 text-white px-[clamp(12px,1.5vw,20px)] py-2 rounded-lg font-semibold transition whitespace-nowrap text-[clamp(12px,1vw,15px)] shadow-lg hover:shadow-xl"
                 >
                   Logout
                 </button>
@@ -200,7 +201,7 @@ export default function Navigation() {
               {/* MOBILE MENU BUTTON */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="min-[1380px]:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 text-gray-900 dark:text-white"
+                className="min-[1200px]:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 text-gray-900 dark:text-white"
               >
                 {isOpen ? (
                   <X className="w-6 h-6" />
@@ -214,20 +215,20 @@ export default function Navigation() {
         </div>
       </nav>
 
-      {/* MOBILE MENU BACKDROP (Now appears at 1380px) */}
+      {/* MOBILE MENU BACKDROP */}
       <div
         className={`
-          fixed inset-0 z-30 min-[1380px]:hidden
+          fixed inset-0 z-30 min-[1200px]:hidden
           bg-black/50 backdrop-blur-sm
           ${isOpen ? "backdrop-open pointer-events-auto" : "backdrop-close pointer-events-none"}
         `}
         onClick={() => setIsOpen(false)}
       />
 
-      {/* MOBILE MENU DRAWER (Now appears at 1380px) */}
+      {/* MOBILE MENU DRAWER */}
       <div
         className={`
-          fixed inset-y-0 right-0 z-40 min-[1380px]:hidden
+          fixed inset-y-0 right-0 z-40 min-[1200px]:hidden
           w-72 bg-white dark:bg-gray-800 shadow-2xl border-l border-gray-200 dark:border-gray-700
           ${isOpen ? "menu-open" : "menu-close"}
         `}
