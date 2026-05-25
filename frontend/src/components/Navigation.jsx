@@ -100,7 +100,6 @@ export default function Navigation() {
 
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-950 bg-gradient-to-b from-teal-50/50 to-transparent dark:from-gray-800/50 shadow-md border-b border-gray-200 dark:border-gray-800">
         
-        {/* CHANGED THIS LINE: Removed max-w-7xl, added w-full for full stretching and equal padding */}
         <div className="w-full px-4 lg:px-12">
           
           <div className="flex h-20 items-center justify-between w-full">
@@ -120,7 +119,7 @@ export default function Navigation() {
             </div>
 
             {/* DESKTOP NAV */}
-            <div className="hidden min-[1200px]:flex items-center gap-2 flex-1 justify-center px-4 xl:px-8">
+            <div className="hidden min-[1380px]:flex items-center gap-2 flex-1 justify-center px-4 xl:px-8">
               {navItems.map((item, index) => {
                 const hoverColors = [
                   "hover:bg-cyan-100 dark:hover:bg-cyan-900/30",
@@ -201,7 +200,7 @@ export default function Navigation() {
               {/* MOBILE MENU BUTTON */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="min-[1200px]:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 text-gray-900 dark:text-white"
+                className="min-[1380px]:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 text-gray-900 dark:text-white"
               >
                 {isOpen ? (
                   <X className="w-6 h-6" />
@@ -215,20 +214,20 @@ export default function Navigation() {
         </div>
       </nav>
 
-      {/* MOBILE MENU BACKDROP */}
+      {/* MOBILE MENU BACKDROP (Now appears at 1380px) */}
       <div
         className={`
-          fixed inset-0 z-30 min-[1200px]:hidden
+          fixed inset-0 z-30 min-[1380px]:hidden
           bg-black/50 backdrop-blur-sm
           ${isOpen ? "backdrop-open pointer-events-auto" : "backdrop-close pointer-events-none"}
         `}
         onClick={() => setIsOpen(false)}
       />
 
-      {/* MOBILE MENU DRAWER */}
+      {/* MOBILE MENU DRAWER (Now appears at 1380px) */}
       <div
         className={`
-          fixed inset-y-0 right-0 z-40 min-[1200px]:hidden
+          fixed inset-y-0 right-0 z-40 min-[1380px]:hidden
           w-72 bg-white dark:bg-gray-800 shadow-2xl border-l border-gray-200 dark:border-gray-700
           ${isOpen ? "menu-open" : "menu-close"}
         `}
